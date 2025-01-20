@@ -34,12 +34,13 @@ export default buildConfig({
         connectionString: process.env.POSTGRES_URL || '',
     }
   }),
+
   plugins: [
     vercelBlobStorage({
         collections: { 
             media: true, 
         },
-        token: process.env.BLORB_READ_WRITE_TOKEN,
+        token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
   ],
   
