@@ -1,6 +1,7 @@
 import sharp from 'sharp'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { buildConfig } from 'payload'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -33,6 +34,15 @@ export default buildConfig({
         connectionString: process.env.POSTGRES_URL || '',
     }
   }),
+  plugins: [
+    vercelBlobStorage({
+        collections: { 
+            media: true, 
+        },
+        token: process.env.BLORB_READ_WRITE_TOKEN,
+    }),
+  ],
+  
   // If you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.
   // This is optional - if you don't need to do these things,
