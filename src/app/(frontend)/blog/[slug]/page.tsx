@@ -6,7 +6,7 @@ interface BlogPostPageProps {
 }
 
 const BlogPostPage = async ({ params }: BlogPostPageProps) => {
-    const { slug } = await params
+    const { slug } = params
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/`
     )
@@ -20,18 +20,27 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
     console.log(post)
     const blogPost = post.find((post: Post) => post.slug_title === slug)
     console.log(blogPost)
+    if (!blogPost) {
+        return <div>Post not found</div>
+    }
     return <BlogPost post={blogPost} />
 }
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/`
     )
     const data = await response.json()
     const posts: Post[] = data.docs
-    return posts.map((post) => ({
-        slug: post.slug_title,
-    }))
+
+    // return posts.map((post) => ({
+    //     slug: post.slug_title,
+    // }))
+    return posts
+        .filter((post) => post.slug_title)
+        .map((post) => ({
+            slug: post.slug_title as string,
+        }))
 }
 
 export default BlogPostPage
