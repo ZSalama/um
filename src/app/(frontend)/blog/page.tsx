@@ -1,68 +1,52 @@
-// import React from 'react'
-// import '../styles/index.css'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
-import Image from 'next/image'
+'use client'
+import React, { useEffect, useState } from 'react'
+import BlogPost from '@/components/BlogPost/BlogPost'
+import { Post } from '@/payload-types'
 
-export default async function Blog() {
-    const payload = await getPayload({ config: configPromise })
-    const users = await payload.find({
-        collection: 'users',
-        select: {
-            name: true,
-        },
-    })
-    const media = await payload.find({
-        collection: 'media',
-        select: {
-            url: true,
-        },
-    })
-    console.log('Media response:', media)
-    console.log(media.docs.map((item: { url?: string | null }) => item.url))
+const Blog = () => {
+    const [posts, setPosts] = useState<Post[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<Error | null>(null)
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch('/api/posts/')
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                const data = await response.json()
+                console.log('API response:', data.docs)
+                if (Array.isArray(data.docs)) {
+                    const posts = data.docs.map((post: Post) => ({
+                        ...post,
+                    }))
+                    setPosts(posts)
+                } else {
+                    throw new Error('Invalid data format')
+                }
+            } catch (err) {
+                setError(err as Error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchPosts()
+    }, [])
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error: {error.message}</p>
+    if (posts.length === 0) return <p>No posts found.</p>
 
     return (
         <div>
-            <h1 className='title'>Blog</h1>
-            <p>
-                users:{' '}
-                {users.docs.map(
-                    (user: { id: number; name?: string | null }) => (
-                        <span key={user.id}>{user.name ?? 'Unknown'}</span>
-                    )
-                )}
-            </p>
-            <p>media:</p>
-            <ul>
-                {media.docs.map(
-                    (item: {
-                        id: number
-                        alt?: string | null
-                        caption?: string | null
-                        url?: string | null
-                    }) => (
-                        <li key={item.id}>
-                            {item.url && (
-                                <Image
-                                    src={item.url}
-                                    alt={item.alt ?? 'No alt text'}
-                                    width={500} // Specify the width
-                                    height={300} // Specify the height
-                                />
-                            )}
-                            <p>{item.caption ?? 'No caption'}</p>
-                        </li>
-                    )
-                )}
-                {/* <li>
-                    <Image
-                        src='https://oick8vuyczecmiup.public.blob.vercel-storage.com/space_tacos.jpg'
-                        alt='Space tacos'
-                        width={500} // Specify the width
-                        height={300} // Specify the height
-                    ></Image>
-                </li> */}
-            </ul>
+            <h1>Blog Posts</h1>
+            {posts.map((post) => (
+                <BlogPost key={post.id} post={post} />
+            ))}
         </div>
     )
 }
+
+export default Blog
