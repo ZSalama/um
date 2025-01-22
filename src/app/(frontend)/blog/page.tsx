@@ -1,12 +1,16 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import BlogPost from '@/components/BlogPost/BlogPost'
+import { useEffect, useState } from 'react'
+import BlogList from '@/components/BlogList/BlogList'
+import Pagination from '@/components/Pagination/Pagination'
 import { Post } from '@/payload-types'
 
-const Blog = () => {
+export default function Blog() {
     const [posts, setPosts] = useState<Post[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<Error | null>(null)
+    const [currentPage, setCurrentPage] = useState(1)
+    // const [postsPerPage, setPostsPerPage] = useState(1)
+    const postsPerPage = 1
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -39,14 +43,20 @@ const Blog = () => {
     if (error) return <p>Error: {error.message}</p>
     if (posts.length === 0) return <p>No posts found.</p>
 
+    const lastPostIndex = currentPage * postsPerPage
+    const firstPostIndex = lastPostIndex - postsPerPage
+    const currentPosts = posts.slice(firstPostIndex, lastPostIndex)
+
     return (
-        <div>
-            <h1>Blog Posts</h1>
-            {posts.map((post) => (
-                <BlogPost key={post.id} post={post} />
-            ))}
+        <div className='app'>
+            <h1>Crypto Gallery</h1>
+            <BlogList posts={currentPosts} />
+            <Pagination
+                totalPosts={posts.length}
+                postsPerPage={postsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+            />
         </div>
     )
 }
-
-export default Blog
