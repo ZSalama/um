@@ -1,42 +1,64 @@
-import { Post } from '@/payload-types'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
+import type { Post } from '@/payload-types'
 import BlogPost from '@/components/BlogPost/BlogPost'
+// import type { Metadata } from 'next'
+import { cache } from 'react'
 
-interface BlogPostPageProps {
-    params: Promise<{ slug: string }>
+export async function generateStaticParams() {
+    const payload = await getPayload({ config: configPromise })
+    const posts = await payload.find({
+        collection: 'posts',
+        select: {
+            slug: true,
+        },
+    })
+
+    const params = posts.docs.map(({ slug }) => {
+        return { slug }
+    })
+
+    return params
 }
 
-const BlogPostPage = async (props: BlogPostPageProps) => {
-    const params = await props.params
-    const { slug } = params
-    const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/`
-    )
-    if (!response.ok) {
-        // Handle error
-        console.error('Failed to fetch post:', response.statusText)
-        return <div>Failed to load post</div>
-    }
-    const data = await response.json()
-    const post = data.docs
-    const blogPost = post.find((post: Post) => post.slug_title === slug)
-    if (!blogPost) {
-        return <div>Post not found</div>
-    }
-    return <BlogPost post={blogPost} />
+type Args = {
+    params: Promise<{
+        slug?: string
+    }>
 }
 
-export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
-    const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/`
-    )
-    const data = await response.json()
-    const posts: Post[] = data.docs
+export default async function Post({ params: paramsPromise }: Args) {
+    const { slug = '' } = await paramsPromise
+    // const url = '/posts/' + slug_title
+    const post = await queryPostBySlug({ slug })
 
-    return posts
-        .filter((post) => post.slug_title)
-        .map((post) => ({
-            slug: post.slug_title as string,
-        }))
+    if (!post) return <div>Post not found</div>
+
+    return <BlogPost post={post} />
 }
 
-export default BlogPostPage
+const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
+    const payload = await getPayload({ config: configPromise })
+
+    const result = await payload.find({
+        collection: 'posts',
+        limit: 10,
+        pagination: false,
+        where: {
+            slug: {
+                equals: slug,
+            },
+        },
+    })
+
+    // console.log(result.docs)
+
+    return result.docs?.[0] || null
+})
+
+// export async function generateMetadata({ params: paramsPromise}: Args): Promise<Metadata> {
+//     const { slug_title = '' } = await paramsPromise
+//     const post = await queryPostBySlug({ slug_title })
+
+//     return generateMeta({ doc: post })
+// }

@@ -102,6 +102,7 @@ export interface Post {
   };
   slug_title?: string | null;
   publishedAt?: string | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -284,6 +285,7 @@ export interface PostsSelect<T extends boolean = true> {
   content?: T;
   slug_title?: T;
   publishedAt?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
