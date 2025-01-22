@@ -2,10 +2,11 @@ import { Post } from '@/payload-types'
 import BlogPost from '@/components/BlogPost/BlogPost'
 
 interface BlogPostPageProps {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
-const BlogPostPage = async ({ params }: BlogPostPageProps) => {
+const BlogPostPage = async (props: BlogPostPageProps) => {
+    const params = await props.params
     const { slug } = params
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/`
@@ -17,9 +18,7 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
     }
     const data = await response.json()
     const post = data.docs
-    console.log(post)
     const blogPost = post.find((post: Post) => post.slug_title === slug)
-    console.log(blogPost)
     if (!blogPost) {
         return <div>Post not found</div>
     }
@@ -33,9 +32,6 @@ export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
     const data = await response.json()
     const posts: Post[] = data.docs
 
-    // return posts.map((post) => ({
-    //     slug: post.slug_title,
-    // }))
     return posts
         .filter((post) => post.slug_title)
         .map((post) => ({
