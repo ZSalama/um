@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './Pagination.module.css'
 
 // import './Pagination.css'
 
@@ -22,13 +23,13 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     return (
-        <div className='pagination'>
+        <div className={styles.pagination}>
             {pages.map((page, index) => {
                 return (
                     <button
                         key={index}
                         onClick={() => setCurrentPage(page)}
-                        className={page == currentPage ? 'active' : ''}
+                        className={page == currentPage ? styles.active : ''}
                     >
                         {page}
                     </button>

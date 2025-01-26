@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
+// import Logo from '../../components/Logo/Logo'
 
 const Navbar = () => {
     const [style, setStyle] = useState(false)

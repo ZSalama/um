@@ -10,7 +10,7 @@ export default function Blog() {
     const [error, setError] = useState<Error | null>(null)
     const [currentPage, setCurrentPage] = useState(1)
     // const [postsPerPage, setPostsPerPage] = useState(1)
-    const postsPerPage = 1
+    const postsPerPage = 3
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -49,7 +49,7 @@ export default function Blog() {
 
     return (
         <div className='app'>
-            <h1>Crypto Gallery</h1>
+            {/* <h1>Crypto Gallery</h1> */}
             <BlogList posts={currentPosts} />
             <Pagination
                 totalPosts={posts.length}
