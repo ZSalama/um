@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import styles from './page.module.css'
 import heroImage from '@/media/hero_slash.jpg'
 import Image from 'next/image'
