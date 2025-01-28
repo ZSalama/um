@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer/Footer'
+import Image from 'next/image'
+import background from '@/media/background_sunset.jpg'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -30,6 +32,16 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <Navbar />
+                <div className='backgroundImageContainer'>
+                    <Image
+                        src={background}
+                        alt='Background'
+                        layout='fill'
+                        objectFit='cover'
+                        quality={100}
+                        style={{ zIndex: -1 }}
+                    />
+                </div>
                 {children}
                 <Footer />
             </body>

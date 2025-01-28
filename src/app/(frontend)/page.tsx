@@ -1,6 +1,8 @@
 import styles from './page.module.css'
 import heroImage from '@/media/hero_slash.jpg'
 import Image from 'next/image'
+import HeroFeatures from '@/components/HeroFeatures/HeroFeatures'
+import HeroServices from '@/components/HeroServices/HeroServices'
 
 export default function Home() {
     return (
@@ -30,6 +32,8 @@ export default function Home() {
                     />
                 </div>
             </section>
+            <HeroFeatures />
+            <HeroServices />
         </div>
     )
 }
