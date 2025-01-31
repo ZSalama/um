@@ -4,7 +4,7 @@ import styles from './BlogList.module.css'
 
 const BlogList = ({ posts }: { posts: Post[] }) => {
     return (
-        <div>
+        <div className={styles.blogListContainer}>
             <h1 className={styles.title}>Blog Posts</h1>
             <div className={styles.blogList}>
                 {posts.map((post) => (

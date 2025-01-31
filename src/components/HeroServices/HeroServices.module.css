@@ -22,7 +22,6 @@
 .features_text {
     position: relative;
     z-index: 2; /* Ensure the content is above the background image */
-    color: white; /* Adjust text color for better visibility */
     /* border-radius: 40px;
     border: 1px solid red; */
     font-size: 1.2em;
@@ -38,8 +37,16 @@
     border-radius: 40px;
     z-index: 3;
     text-align: center;
-    color: white;
     margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition:
+        opacity 0.6s ease-out,
+        transform 0.6s ease-out; /* Smooth transition */
+}
+.header.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .features_grid {
@@ -51,6 +58,17 @@
     padding-block: 1rem;
     width: min(95%, 70rem);
     margin-inline: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition:
+        opacity 0.6s ease-out,
+        transform 1.5s ease-out; /* Smooth transition */
+    color: black;
+}
+
+.features_grid.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @media screen and (max-width: 700px) {

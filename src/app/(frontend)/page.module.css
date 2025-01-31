@@ -17,8 +17,9 @@
     height: calc(100vh - 86px);
     /* background-color: var(--background); */
     /* Gradient background */
-
+    max-width: 1600px;
     color: var(--foreground);
+    margin: 0 auto;
 }
 
 .CTA_container {

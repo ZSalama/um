@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 :root {
-    --background: #ffffff;
+    /* --background: #ffffff;
     --foreground: #171717;
     --hover-color: #272832;
     --nav-background-color: #4c5079;
-    --link-color: #fff;
+    --link-color: #fff; */
+    --Celadon: #94e8b4;
+    --Cambridge-blue: #72bda3;
+    --Sea-green: #5e8c61;
+    --Feldgrau: #4e6151;
+    --Van-dyke: #3b322c;
     display: flex;
     flex-direction: column;
     min-height: 100%;

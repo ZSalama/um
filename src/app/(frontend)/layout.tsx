@@ -4,7 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer/Footer'
 import Image from 'next/image'
-import background from '@/media/background_sunset.jpg'
+import background from '@/media/layout_background.jpg'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -36,10 +36,9 @@ export default function RootLayout({
                     <Image
                         src={background}
                         alt='Background'
-                        layout='fill'
-                        objectFit='cover'
+                        fill={true}
                         quality={100}
-                        style={{ zIndex: -1 }}
+                        style={{ zIndex: -1, objectFit: 'cover' }}
                     />
                 </div>
                 {children}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import BlogList from '@/components/BlogList/BlogList'
 import Pagination from '@/components/Pagination/Pagination'
 import { Post } from '@/payload-types'
+import Loader from '@/components/Loading/Loading'
 
 export default function Blog() {
     const [posts, setPosts] = useState<Post[]>([])
@@ -39,7 +40,7 @@ export default function Blog() {
         fetchPosts()
     }, [])
 
-    if (loading) return <p>Loading...</p>
+    if (loading) return <Loader />
     if (error) return <p>Error: {error.message}</p>
     if (posts.length === 0) return <p>No posts found.</p>
 
@@ -49,7 +50,6 @@ export default function Blog() {
 
     return (
         <div className='app'>
-            {/* <h1>Crypto Gallery</h1> */}
             <BlogList posts={currentPosts} />
             <Pagination
                 totalPosts={posts.length}

@@ -1,18 +1,43 @@
-import React from 'react'
+'use client'
+import { useEffect } from 'react'
 import Image from 'next/image'
 import styles from './HeroServices.module.css'
-import heroImage from '@/media/services_background.jpg'
+import heroImage from '@/media/plain_background.png'
 
 const HeroFeatures = () => {
+    useEffect(() => {
+        const handleScroll = () => {
+            const features_text = document.querySelector(
+                `.${styles.features_grid}`
+            )
+            if (features_text) {
+                const rect = features_text.getBoundingClientRect()
+                if (rect.top <= window.innerHeight) {
+                    features_text.classList.add(styles.visible)
+                }
+            }
+            const features_header = document.querySelector(`.${styles.header}`)
+            if (features_header) {
+                const rect = features_header.getBoundingClientRect()
+                if (rect.top <= window.innerHeight) {
+                    features_header.classList.add(styles.visible)
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
     return (
         <div className={styles.hero_features_container}>
-            <h1 className={styles.header}> website Services </h1>
+            <h1 className={styles.header}> Website Services </h1>
             <div className={styles.features_image_container}>
                 <Image
                     src={heroImage}
                     alt='Features Image'
-                    layout='fill'
-                    objectFit='cover'
+                    fill={true}
+                    style={{ objectFit: 'cover' }}
                     quality={100}
                     className={styles.feautures_image}
                 />
@@ -20,9 +45,9 @@ const HeroFeatures = () => {
             <div className={styles.features_grid}>
                 <div>
                     <p className={styles.features_text}>
-                        Our team of designers will work with you to create a
-                        custom website that reflects your brand and communicates
-                        your message effectively.
+                        Work side by side to design and create your custom
+                        website that reflects your brand and communicates your
+                        message effectively.
                     </p>
                 </div>
                 <div>

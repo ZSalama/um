@@ -41,107 +41,109 @@ const Navbar = () => {
                 onClick={() => openSidebar()}
             ></div>
             {/* navbar */}
-            <nav
-                className={
-                    style
-                        ? styles.nav + ' ' + styles.show
-                        : styles.nav + ' ' + styles.hide
-                }
-                onClick={() => openSidebar()}
-            >
-                <ul className={styles.navList}>
-                    <li>
-                        <button
-                            className={
-                                styles.link + ' ' + styles.menu_close_button
-                            }
-                            onClick={() => openSidebar()}
-                        >
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                height='40px'
-                                viewBox='0 -960 960 960'
-                                width='40px'
-                                fill='#c9c9c9'
+            <div className={styles.navContainer}>
+                <nav
+                    className={
+                        style
+                            ? styles.nav + ' ' + styles.show
+                            : styles.nav + ' ' + styles.hide
+                    }
+                    onClick={() => openSidebar()}
+                >
+                    <ul className={styles.navList}>
+                        <li>
+                            <button
+                                className={
+                                    styles.link + ' ' + styles.menu_close_button
+                                }
+                                onClick={() => openSidebar()}
                             >
-                                <path d='m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z' />
-                            </svg>
-                        </button>
-                    </li>
-                    <li className={styles.home_link}>
-                        <Link
-                            href='/'
-                            className={
-                                pathname === '/'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href='/about'
-                            className={
-                                pathname === '/about'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href='/portfolio'
-                            className={
-                                pathname === '/portfolio'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            Portfolio
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href='/pricing'
-                            className={
-                                pathname === '/pricing'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            Pricing
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href='/contact'
-                            className={
-                                pathname === '/contact'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            Contact Us
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href='/blog'
-                            className={
-                                pathname === '/blog'
-                                    ? styles.activeLink + ' ' + styles.link
-                                    : styles.link
-                            }
-                        >
-                            Blog
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    height='40px'
+                                    viewBox='0 -960 960 960'
+                                    width='40px'
+                                    fill='#c9c9c9'
+                                >
+                                    <path d='m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z' />
+                                </svg>
+                            </button>
+                        </li>
+                        <li className={styles.home_link}>
+                            <Link
+                                href='/'
+                                className={
+                                    pathname === '/'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/about'
+                                className={
+                                    pathname === '/about'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                About
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/portfolio'
+                                className={
+                                    pathname === '/portfolio'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Portfolio
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/pricing'
+                                className={
+                                    pathname === '/pricing'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Pricing
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/contact'
+                                className={
+                                    pathname === '/contact'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Contact Us
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/blog'
+                                className={
+                                    pathname === '/blog'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Blog
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </>
     )
 }

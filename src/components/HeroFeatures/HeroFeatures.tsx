@@ -31,13 +31,13 @@ const HeroFeatures = () => {
 
     return (
         <div className={styles.hero_features_container}>
-            <h1 className={styles.header}> website features </h1>
+            <h1 className={styles.header}> Website Features </h1>
             <div className={styles.features_image_container}>
                 <Image
                     src={heroImage}
                     alt='Features Image'
-                    layout='fill'
-                    objectFit='cover'
+                    fill={true}
+                    style={{ objectFit: 'cover' }}
                     quality={100}
                     className={styles.feautures_image}
                 />

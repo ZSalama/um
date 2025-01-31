@@ -1,41 +1,48 @@
 .navList {
     list-style: none; /* Removes bullet points */
     display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    width: 100%;
 }
 
 .home_link {
-    margin-right: auto;
+    margin-right: auto; /* Pushes the home link to the left */
     display: flex;
     text-decoration: none;
-    color: var(--link-color);
+    /* color: var(--link-color); */
     /* padding: 5px 10px 0px 10px; */
 }
 
 .link {
     display: flex;
     text-decoration: none;
-    color: var(--link-color);
+    /* color: var(--link-color); */
     padding: 30px 2em;
     min-width: 100px;
+    color: white;
 }
 
 .activeLink {
-    border-bottom: 2px solid var(--link-color);
-    background-color: var(--accent-color);
+    border-bottom: 2px solid var(--Celadon);
+    background-color: var(--Van-dyke);
+    color: var(--Celadon);
 }
 
-/* .accent-link {
-    background-color: var(--accent-color);
-} */
-
 .nav {
-    /* position: fixed; */
-    background-color: var(--nav-background-color);
-    color: var(--text-color);
-    border-bottom: 1px solid var(--hover-color);
+    background-color: var(--Feldgrau);
     z-index: 9;
+    max-width: 1550px; /* Set a maximum width for the .nav element */
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Space between home link and other items */
+    align-items: center;
+}
 
-    /* justify-content: space-between; */
+.navContainer {
+    display: flex;
+    justify-content: center; /* Center the .nav horizontally */
+    background-color: var(--Feldgrau);
+    width: 100%;
 }
 
 .nav li {
@@ -44,7 +51,7 @@
 
 .link:hover {
     transition: background-color 200ms ease-in-out;
-    background-color: var(--hover-color);
+    background-color: var(--Cambridge-blue);
 }
 
 .menu_open_button {
@@ -54,6 +61,12 @@
 
 .menu_close_button {
     display: none;
+}
+
+@media screen and (min-width: 1430px) {
+    .home_link {
+        margin-left: 50px;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -114,6 +127,7 @@
 
     .home_link {
         margin-right: unset;
+        margin-left: 0;
     }
 
     .overlay {

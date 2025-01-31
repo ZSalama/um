@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import heroImage from '@/media/hero_slash.jpg'
+import heroImage from '@/media/hero_splash.jpg'
 import Image from 'next/image'
 import HeroFeatures from '@/components/HeroFeatures/HeroFeatures'
 import HeroServices from '@/components/HeroServices/HeroServices'
@@ -25,8 +25,8 @@ export default function Home() {
                     <Image
                         src={heroImage}
                         alt='Hero Image'
-                        layout='fill'
-                        objectFit='cover'
+                        fill={true}
+                        style={{ objectFit: 'cover' }}
                         quality={100}
                         className={styles.heroImage}
                     />

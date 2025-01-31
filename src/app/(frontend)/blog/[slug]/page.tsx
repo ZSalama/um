@@ -5,22 +5,6 @@ import BlogPost from '@/components/BlogPost/BlogPost'
 // import type { Metadata } from 'next'
 import { cache } from 'react'
 
-export async function generateStaticParams() {
-    const payload = await getPayload({ config: configPromise })
-    const posts = await payload.find({
-        collection: 'posts',
-        select: {
-            slug: true,
-        },
-    })
-
-    const params = posts.docs.map(({ slug }) => {
-        return { slug }
-    })
-
-    return params
-}
-
 type Args = {
     params: Promise<{
         slug?: string
@@ -55,6 +39,22 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
 
     return result.docs?.[0] || null
 })
+
+export async function generateStaticParams() {
+    const payload = await getPayload({ config: configPromise })
+    const posts = await payload.find({
+        collection: 'posts',
+        select: {
+            slug: true,
+        },
+    })
+
+    const params = posts.docs.map(({ slug }) => {
+        return { slug }
+    })
+
+    return params
+}
 
 // export async function generateMetadata({ params: paramsPromise}: Args): Promise<Metadata> {
 //     const { slug_title = '' } = await paramsPromise
